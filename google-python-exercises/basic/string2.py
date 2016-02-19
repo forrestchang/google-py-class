@@ -17,7 +17,13 @@
 # Return the resulting string.
 def verbing(s):
   # +++your code here+++
-  return
+  if len(s) < 3:
+    return s
+  else:
+    if 'ing' in s:
+      return s + 'ly'
+    else:
+      return s + 'ing'
 
 
 # E. not_bad
@@ -30,8 +36,11 @@ def verbing(s):
 # This dinner is good!
 def not_bad(s):
   # +++your code here+++
-  return
-
+  n = s.find('not')
+  b = s.find('bad')
+  if n != -1 and b != -1 and b > n:
+    s = s[:n] + 'good' + s[b+3:]
+  return s
 
 # F. front_back
 # Consider dividing a string into two halves.
@@ -40,9 +49,19 @@ def not_bad(s):
 # e.g. 'abcde', the front half is 'abc', the back half 'de'.
 # Given 2 strings, a and b, return a string of the form
 #  a-front + b-front + a-back + b-back
+def divide(s):
+  result = []
+  if len(s) % 2 == 0:
+    result.append(s[:len(s)/2])
+    result.append(s[len(s)/2:])
+  else:
+    result.append(s[:len(s)/2 + 1])
+    result.append(s[len(s)/2 + 1:])
+  return result
+
 def front_back(a, b):
   # +++your code here+++
-  return
+  return divide(a)[0] + divide(b)[0] + divide(a)[1] + divide(b)[1]
 
 
 # Simple provided test() function used in main() to print
