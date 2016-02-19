@@ -44,7 +44,28 @@ import sys
 # You could write a helper utility function that reads a file
 # and builds and returns a word/count dict for it.
 # Then print_words() and print_top() can just call the utility function.
+def count_words(filename):
+  f = open(filename, 'r')
+  text = f.read()
+  word_list = text.split()
+  frequency = {el:0 for el in word_list}
+  for word in word_list:
+    if word in frequency.keys():
+      frequency[word] += 1
+  return frequency
 
+def print_words(filename):
+  frequency = count_words(filename)
+  for key, value in frequency.items():
+    print key, ' ', value
+
+def print_top(filename):
+  import operator
+  frequency = count_words(filename)
+  sorted_freq = sorted(frequency.items(), key=operator.itemgetter(1), reverse=True)
+  for i in range(0, 20):
+    print sorted_freq[i][0], ' ', sorted_freq[i][1]
+    
 ###
 
 # This basic command line argument parsing code is provided and
